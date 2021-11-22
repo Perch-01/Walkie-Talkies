@@ -1,0 +1,24 @@
+{
+  "name": "walkie_talkies_backend",
+  "version": "1.0.0",
+  "description": "The backend for walkie talkie",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Perch-01/Walkie-Talkies.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Socket.io",
+    "MongoDB"
+  ],
+  "author": "Okoh Ugochukwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Perch-01/Walkie-Talkies/issues"
+  },
+  "homepage": "https://github.com/Perch-01/Walkie-Talkies#readme"
+}
