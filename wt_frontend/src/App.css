@@ -1,0 +1,19 @@
+#container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #CDC4ED;
+    /* This is so that border is inside it's edges*/
+    /* border: 25px solid rgba(149, 154, 172, 0.5);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; */
+}
+#backgroundLeft{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    z-index: 0;
+}
