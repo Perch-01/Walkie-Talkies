@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './layout.module.css';
-import { useSpring, animated } from 'react-spring';
 import InputField from '../InputField';
 import Button from '../Button';
 import { commonvalues } from '../../constants/common';
@@ -11,29 +10,8 @@ const Index = ({ }) => {
     const [email, setEmail] = useState('');
     const [isSignIn, setIsSignIn] = useState(true);
 
-    const [position, positionString] = useSpring(() => ({
-        right: '-85vw',
-        //right: '0vw',
-    }));
-    const animatePosition = () => {
-        positionString.start({
-            right: '0vw',
-            config: {
-                duration: 1000,
-            }
-        });
-    };
-    useEffect(() => {
-        animatePosition();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
     return (
-        <animated.div
-            id={styles.container}
-            style={{
-                //...position
-                ...position,
-            }}>
+        <>
             <div id={styles.layer1}>
                 <p id={styles.layer1Text} style={{ marginRight: "10px" }}>
                     {isSignIn ?
@@ -47,7 +25,7 @@ const Index = ({ }) => {
                         const x = !isSignIn;
                         setIsSignIn(x);
                     }}
-                    backgroundColor={commonvalues.colors.WHITE}
+                    backgroundColor={commonvalues.colors.GREY}
                     textColor={commonvalues.colors.PURPLE}
                     height={'40px'}
                     borderColor={commonvalues.colors.PURPLE}
@@ -79,12 +57,12 @@ const Index = ({ }) => {
                     text={isSignIn ? "Sign into Walkie Talkie" : "Sign up for Walkie Talkie"}
                     onClick={() => { }}
                     backgroundColor={commonvalues.colors.PURPLE}
-                    textColor={commonvalues.colors.WHITE}
+                    textColor={commonvalues.colors.GREY}
                     height={'50px'}
                     marginTop={"20px"}
                 />
             </div>
-        </animated.div>
+        </>
     )
 };
 export default Index;

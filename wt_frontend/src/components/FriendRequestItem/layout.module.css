@@ -1,0 +1,37 @@
+#container {
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    -moz-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: relative;
+    min-height: 80px;
+    width: 100%;
+}
+
+#profilePic {
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    border: 0.5px solid rgba(149, 154, 172, 0.5);
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    position: relative;
+}
+
+#nameDescription {
+    margin-left: 15px;
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#name {
+    font-size: 100%;
+    font-weight: 700;
+    text-overflow: ellipsis;
+}
