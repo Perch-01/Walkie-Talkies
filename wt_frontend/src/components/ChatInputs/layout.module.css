@@ -1,0 +1,35 @@
+#container {
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    -moz-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 95%;
+    justify-content: space-between;
+}
+
+#input {
+    border: 0;
+    background-color: #ffffff;
+    margin-left: 10px;
+    width: 77%;
+    resize: none;
+    height: 26px;
+}
+
+#input:focus {
+    outline: none;
+}
+
+#input::-webkit-scrollbar {
+    display: none;
+    height: 0px;
+    width: 0px;
+}
+
+.icon:active {
+    opacity: 0.6;
+}

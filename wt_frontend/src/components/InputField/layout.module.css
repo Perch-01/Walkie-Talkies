@@ -11,7 +11,7 @@
 }
 
 #text {
-    background-color: #ffffff;
+    background-color: #F0F0F0;
     padding-left: 7px;
     padding-right: 7px;
     position: absolute;
@@ -19,6 +19,7 @@
 
 #input {
     border: 0;
+    background-color: #F0F0F0;
 }
 
 #input:focus {

@@ -1,0 +1,40 @@
+#title {
+    width: 85%;
+    font-weight: 800;
+    font-size: 200%;
+    margin-top: 40px;
+}
+
+#boxContainer {
+    width: 95%;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+    margin-top: 20px;
+}
+
+#friendsBox {
+    width: 40%;
+    flex-direction: column;
+    height: 86vh;
+    align-items: center;
+    overflow: scroll;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    padding-bottom: 50px;
+}
+
+#friendsBox::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+#chatBox {
+    width: 60%;
+    flex-direction: column;
+    height: 86vh;
+}

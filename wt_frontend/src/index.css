@@ -5,6 +5,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+textarea {
+    font-family: 'Trebuchet MS', 'Courier New', 'Lucida Grande', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
 p {
     margin: 0px;
     padding: 0px;
