@@ -88,7 +88,6 @@ const setChatNumberToZero = async (userId, recieverId) => {
 
     const friendObject_ = await User.aggregate(pipeline);
     const friendObject = friendObject_[0].friends;
-
     await Friends.updateOne(
         { _id: friendObject._id },
         {
