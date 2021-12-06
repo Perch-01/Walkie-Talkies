@@ -17,7 +17,7 @@ const Index = ({
                 <AiOutlineUser size={30} />
             </div>
             <div id={styles.nameDescription}>
-                <p id={styles.name}>{`friends_username`}</p>
+                <p id={styles.name}>{username}</p>
             </div>
         </div>
     )

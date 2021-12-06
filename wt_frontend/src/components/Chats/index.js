@@ -3,6 +3,8 @@ import { commonvalues } from '../../constants/common';
 import styles from './layout.module.css';
 const Index = ({
     isRecieved,
+    message,
+    date,
 }) => {
     return (
         <div id={styles.container}
@@ -15,10 +17,8 @@ const Index = ({
                     borderBottomLeftRadius: isRecieved ? "0px" : "10px",
                     borderBottomRightRadius: isRecieved ? "10px" : "0px",
                 }}
-            >
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            </p>
+            >{message}</p>
+            <p id={styles.date}>{date}</p>
         </div>
     )
 };

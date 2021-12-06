@@ -1,7 +1,7 @@
 import { useSpring, animated } from 'react-spring';
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './layout.module.css';
-const Index = ({ text, placeholder, value, onChange, isPassword }) => {
+const Index = ({ text, placeholder, value, onChange, isPassword, isEmail }) => {
     const [focused, setFocused] = useState(false);
     const inputRef = useRef(null);
     const [position, positionString] = useSpring(() => ({
@@ -58,7 +58,7 @@ const Index = ({ text, placeholder, value, onChange, isPassword }) => {
                 style={{}}
                 value={value}
                 onChange={event => {
-                    const value = isPassword ?
+                    const value = isPassword || isEmail ?
                         event.target.value.trim() :
                         event.target.value
                             .replace(/\W/g, '')

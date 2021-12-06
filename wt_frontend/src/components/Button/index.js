@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styles from './layout.module.css';
+import Loader from "react-loader-spinner";
+import { commonvalues } from '../../constants/common';
 const Index = ({
     text,
     onClick,
     backgroundColor,
     textColor,
+    loading,
     fontSize = "100%",
     fontWeight = 700,
     borderRadius = 5,
@@ -26,15 +29,21 @@ const Index = ({
                 marginTop: marginTop,
             }}
             onClick={onClick}>
-            <p
-                id={styles.text}
-                style={{
-                    color: textColor,
-                    fontSize: fontSize,
-                    fontWeight: fontWeight,
-                }}>
-                {text}
-            </p>
+            {loading ?
+                <Loader
+                    type="TailSpin"
+                    color={commonvalues.colors.WHITE}
+                    height={'15px'}
+                    width={'15px'} /> :
+                <p
+                    id={styles.text}
+                    style={{
+                        color: textColor,
+                        fontSize: fontSize,
+                        fontWeight: fontWeight,
+                    }}>
+                    {text}
+                </p>}
         </div>
     )
 };

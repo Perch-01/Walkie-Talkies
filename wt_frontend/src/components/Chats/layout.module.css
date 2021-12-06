@@ -11,3 +11,9 @@
     padding: 8px;
     line-height: 150%;
 }
+
+#date {
+    font-size: 80%;
+    font-weight: 600;
+    margin-top: 10px;
+}
