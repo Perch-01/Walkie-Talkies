@@ -33,7 +33,6 @@ const Index = ({
                 date: date,
             })
             setChats(newChat);
-            setMessage('');
             scrollViewRef.current.scrollIntoView();
         }
     }, [recentMessageData])
