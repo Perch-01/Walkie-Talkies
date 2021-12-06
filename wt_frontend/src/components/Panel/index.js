@@ -8,6 +8,7 @@ import FriendRequests from '../FriendRequests';
 // eslint-disable-next-line no-empty-pattern
 const Index = ({
     selected,
+    setShowMenu,
 }) => {
 
     const [position, positionString] = useSpring(() => ({
@@ -19,6 +20,9 @@ const Index = ({
             right: '0vw',
             config: {
                 duration: 1000,
+            },
+            onRest: () => {
+                setShowMenu(true);
             }
         });
     };

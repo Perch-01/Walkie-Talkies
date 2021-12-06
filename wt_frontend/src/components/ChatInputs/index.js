@@ -37,6 +37,14 @@ const Index = ({
                 onBlur={() => {
                     setFocused(false);
                 }}
+                onKeyDown={
+                    (e) => {
+                        if (e.keyCode == 13 && e.shiftKey == false) {
+                            e.preventDefault();
+                            sendMessageFunction();
+                        }
+                    }
+                }
             />
             {isMessage && <>
                 <GrAttachment

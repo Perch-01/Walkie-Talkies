@@ -11,7 +11,9 @@ const Index = ({
     isFriend,
     date,
     numberOfUnreadMessages,
-    friendRequestSent
+    friendRequestSent,
+    username,
+    latestMessage,
 }) => {
     const [size, sizeSpring] = useSpring(() => ({
         minHeight: "80px",
@@ -44,22 +46,23 @@ const Index = ({
                 <AiOutlineUser size={30} />
             </div>
             <div id={styles.nameDescription}>
-                <p id={styles.name}>{`friends_username`}</p>
-                {isFriend && !selected && <p id={styles.description}>{`We have so much to discuss, remember our trip`}</p>}
+                <p id={styles.name}>{username}</p>
+                {isFriend && !selected && <p id={styles.description}>{latestMessage}</p>}
             </div>
 
             {isFriend ? (
-                !selected && numberOfUnreadMessages !== 0 &&
+                !selected && 
                 <>
                     <p id={styles.date}>{date}</p>
+                   { numberOfUnreadMessages !== 0 &&
                     <div className={styles.circle}>
                         <p id={styles.numberOfUnreadMessages}>{numberOfUnreadMessages}</p>
-                    </div>
+                    </div>}
                 </>
             ) : <div className={styles.circle}>
                 {friendRequestSent ?
-                    <BsPlusLg color={commonvalues.colors.WHITE} size={10} /> :
-                    <MdDone color={commonvalues.colors.WHITE} size={10} />}
+                    <MdDone color={commonvalues.colors.WHITE} size={10} /> :
+                    <BsPlusLg color={commonvalues.colors.WHITE} size={10} />}
             </div>}
         </animated.div>
     )

@@ -12,7 +12,6 @@ function App() {
         src={'./backgroundLeft.svg'}
         id={"backgroundLeft"}
         alt={''}
-       // style={{ position: 'absolute' }}
       />
       <Routes />
     </div>
