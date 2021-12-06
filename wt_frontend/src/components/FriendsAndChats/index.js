@@ -179,17 +179,13 @@ const Index = ({ }) => {
                                         friendObject,
                                         _id
                                     } = value;
-                                    const {
-                                        latestMessage = null,
-                                        mostRecentEditTime = null,
-                                        unreadMessages = null
-                                    } = friendObject
+
                                     return (
                                         <Friends
                                             username={username}
                                             key={index}
                                             isActive={activeUsers.includes(_id)}
-                                            latestMessage={latestMessage ? latestMessage : ''}
+                                            latestMessage={friendObject?.latestMessage ? friendObject?.latestMessage : ''}
                                             onClick={() => {
                                                 if (isFriend) {
                                                     setSelected({
@@ -212,10 +208,12 @@ const Index = ({ }) => {
                                                     setFriends(newFriends);
                                                 }
                                             }}
-                                            date={mostRecentEditTime ? formatDate(mostRecentEditTime) : ''}
+                                            date={friendObject?.mostRecentEditTime ?
+                                                formatDate(friendObject?.mostRecentEditTime) :
+                                                ''}
                                             isFriend={isFriend}
                                             selected={isFriend ? selected?.index === index : false}
-                                            numberOfUnreadMessages={unreadMessages ? unreadMessages : 0}
+                                            numberOfUnreadMessages={friendObject?.unreadMessages ? friendObject?.unreadMessages : 0}
                                             friendRequestSent={friendRequestSent}
                                         />
                                     );
