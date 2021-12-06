@@ -14,6 +14,7 @@ const Index = ({
     friendRequestSent,
     username,
     latestMessage,
+    isActive
 }) => {
     const [size, sizeSpring] = useSpring(() => ({
         minHeight: "80px",
@@ -42,7 +43,7 @@ const Index = ({
             id={styles.container}
             style={{ ...size, }}>
             <div id={styles.profilePic}>
-                {isFriend && <div id={styles.active} />}
+                {isFriend && isActive && <div id={styles.active} />}
                 <AiOutlineUser size={30} />
             </div>
             <div id={styles.nameDescription}>
@@ -51,13 +52,13 @@ const Index = ({
             </div>
 
             {isFriend ? (
-                !selected && 
+                !selected &&
                 <>
                     <p id={styles.date}>{date}</p>
-                   { numberOfUnreadMessages !== 0 &&
-                    <div className={styles.circle}>
-                        <p id={styles.numberOfUnreadMessages}>{numberOfUnreadMessages}</p>
-                    </div>}
+                    {numberOfUnreadMessages !== 0 &&
+                        <div className={styles.circle}>
+                            <p id={styles.numberOfUnreadMessages}>{numberOfUnreadMessages}</p>
+                        </div>}
                 </>
             ) : <div className={styles.circle}>
                 {friendRequestSent ?

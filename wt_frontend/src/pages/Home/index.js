@@ -10,7 +10,6 @@ import useUser from '../../hooks/useUser';
 import useFriends from '../../hooks/useFriends';
 import useToken from '../../hooks/useToken';
 import useAuthentication from '../../hooks/useAuthentication';
-
 const Index = () => {
     const [loading, setLoading] = useState(true);
     const [showMenu, setShowMenu] = useState(false);
@@ -70,9 +69,9 @@ const Index = () => {
                     ...logo,
                 }}
             />
-            {!loading && <Panel 
-            setShowMenu={setShowMenu}
-            selected={selected} />}
+            {!loading && <Panel
+                setShowMenu={setShowMenu}
+                selected={selected} />}
             {user && showMenu ?
                 Object.keys(user).length !== 0 ?
                     <div id={styles.layer1}>

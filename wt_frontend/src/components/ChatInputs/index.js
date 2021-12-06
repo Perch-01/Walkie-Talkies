@@ -47,10 +47,10 @@ const Index = ({
                 }
             />
             {isMessage && <>
-                <GrAttachment
+                {/* <GrAttachment
                     className={styles.icon}
                     size={18}
-                    onClick={attachmentFunction} />
+                    onClick={attachmentFunction} /> */}
                 <FaPaperPlane
                     className={styles.icon}
                     size={25}

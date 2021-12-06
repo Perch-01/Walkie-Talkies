@@ -10,6 +10,7 @@ import _ from 'lodash'
 import useFriends from '../../hooks/useFriends';
 import Loader from "react-loader-spinner";
 import useChat from '../../hooks/useChat';
+import useSocketIO from '../../hooks/useSocket';
 
 // eslint-disable-next-line no-empty-pattern
 const Index = ({ }) => {
@@ -18,7 +19,7 @@ const Index = ({ }) => {
     const { user } = useUser();
     const [friends, setFriends] = useState([]);
     const [chats, setChat] = useState([]);
-
+    const { activeUsers, sendMessageSocketIO, recentMessageData } = useSocketIO();
     const {
         friends: userFriends,
     } = useFriends();
@@ -37,7 +38,31 @@ const Index = ({ }) => {
     }, [getChatData]);
 
     useEffect(() => {
-    }, [userFriends]);
+        if (!recentMessageData) return;
+        const { userId, latestMessage, date } = recentMessageData;
+        let newFriends = [...userFriends];
+        for (let i = 0; i < newFriends.length; i++)
+            if (newFriends[i].friendId == userId && date != newFriends[i].mostRecentEditTime) {
+                let currentObject = newFriends[i];
+                currentObject.unreadMessages = currentObject.unreadMessages + 1;
+                currentObject.latestMessage = latestMessage;
+                currentObject.mostRecentEditTime = date;
+                newFriends[i] = { ...currentObject };
+                setFriends(newFriends);
+                break;
+            }
+    }, [recentMessageData]);
+    const clearChatNumber_ = (id) => {
+        let newFriends = [...userFriends];
+        for (let i = 0; i < newFriends.length; i++)
+            if (newFriends[i].friendId == id) {
+                let currentObject = newFriends[i];
+                currentObject.unreadMessages = 0;
+                newFriends[i] = { ...currentObject };
+                setFriends(newFriends);
+                break;
+            }
+    }
     const {
         searchForFriends,
         friendSearchData,
@@ -47,7 +72,7 @@ const Index = ({ }) => {
         listOfFriendsFunction,
     } = useFriends();
     useEffect(() => {
-        if (search.length >= 1) {
+        if (search.length >= 2) {
             const suggestions = () => {
                 searchForFriends(search);
             }
@@ -57,7 +82,8 @@ const Index = ({ }) => {
     }, [search]);
     useEffect(() => {
         if (!friendRequestLoading) {
-            searchForFriends(search);
+            if (search.length >= 2)
+                searchForFriends(search);
             listOfFriendsFunction();
         }
     }, [friendRequestLoading])
@@ -105,7 +131,11 @@ const Index = ({ }) => {
                         </div> :
                         search.length <= 2 ?
                             (userFriends ?
-                                userFriends?.map((value, index) => {
+                                userFriends?.sort((a, b) => {
+                                    const d1 = a?.mostRecentEditTime ? a.mostRecentEditTime : 0;
+                                    const d2 = b?.mostRecentEditTime ? b.mostRecentEditTime : 0;
+                                    return d1 > d2 ? -1 : 1;
+                                }).map((value, index) => {
                                     const {
                                         username, chatLineId,
                                         latestMessage,
@@ -117,6 +147,7 @@ const Index = ({ }) => {
                                             username={username}
                                             latestMessage={latestMessage ? latestMessage : ''}
                                             key={index}
+                                            isActive={activeUsers.includes(friendId)}
                                             onClick={() => {
                                                 setSelected({
                                                     username: username,
@@ -127,6 +158,7 @@ const Index = ({ }) => {
 
                                                 getChats(chatLineId);
                                                 clearChatNumber(user?._id, friendId)
+                                                clearChatNumber_(friendId);
                                             }}
                                             date={mostRecentEditTime ? formatDate(mostRecentEditTime) : ''}
                                             isFriend={isFriend}
@@ -156,6 +188,7 @@ const Index = ({ }) => {
                                         <Friends
                                             username={username}
                                             key={index}
+                                            isActive={activeUsers.includes(_id)}
                                             latestMessage={latestMessage ? latestMessage : ''}
                                             onClick={() => {
                                                 if (isFriend) {
@@ -166,7 +199,8 @@ const Index = ({ }) => {
                                                         _id: _id
                                                     });
                                                     getChats(chatLineId);
-                                                    clearChatNumber(user?._id, _id)
+                                                    clearChatNumber(user?._id, _id);
+                                                    clearChatNumber_(_id);
                                                 }
                                                 else if (!friendRequestSent) {
                                                     setSelected(null);
@@ -193,8 +227,10 @@ const Index = ({ }) => {
                         userId={user?._id}
                         loading={getChatLoading}
                         mainChats={chats}
+                        friendId={selected?._id}
                         senderId={user?._id}
                         sendChat={(value) => {
+                            sendMessageSocketIO(value, selected?._id, user?._id);
                             sendChat(user?._id, selected?._id, selected?.chatLineId, value)
                         }}
                     />
