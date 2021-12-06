@@ -4,22 +4,39 @@ import ChatInput from '../ChatInputs';
 import Chat from '../Chats';
 import Loader from "react-loader-spinner";
 import { commonvalues } from '../../constants/common';
+import useSocketIO from '../../hooks/useSocket';
 
 const Index = ({
     loading,
     mainChats,
     sendChat,
-    senderId,
     userId,
+    friendId
 }) => {
     const scrollViewRef = useRef(null);
     const [message, setMessage] = useState('');
     const [chats, setChats] = useState([]);
+    const { recentMessageData } = useSocketIO();
 
     useEffect(() => {
-        scrollViewRef.current.scrollIntoView();
-    }, []);
 
+        scrollViewRef.current.scrollIntoView({ behavior: "smooth" });
+    }, [chats]);
+    useEffect(() => {
+        if (!recentMessageData) return;
+        const { userId, latestMessage, date } = recentMessageData;
+        if (userId === friendId) {
+            let newChat = [...chats];
+            newChat.push({
+                senderId: userId,
+                message: latestMessage,
+                date: date,
+            })
+            setChats(newChat);
+            setMessage('');
+            scrollViewRef.current.scrollIntoView();
+        }
+    }, [recentMessageData])
     useEffect(() => {
         if (!mainChats) return;
         setChats(mainChats);
@@ -28,7 +45,7 @@ const Index = ({
     const sendMessage = () => {
         let newChat = [...chats];
         newChat.push({
-            senderId: senderId,
+            senderId: userId,
             message: message,
             date: new Date().getTime(),
         })
@@ -90,8 +107,10 @@ const Index = ({
                 isMessage={true}
                 attachmentFunction={() => { }}
                 sendMessageFunction={() => {
-                    sendChat(message);
-                    sendMessage();
+                    if (message.length != 0) {
+                        sendChat(message);
+                        sendMessage();
+                    }
                 }}
             />
             <div style={{ height: "15px" }} />

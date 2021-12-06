@@ -23,7 +23,7 @@ const getChat = async (req, res) => {
 const setChatNumberToZero = async (req, res) => {
     try {
         const { userId, recieverId } = req.body;
-        await chatService.setChatNumberToZero(userId, recieverId);
+        await chatService.setChatNumberToZero(recieverId, userId);
         res.status(200).send({ message: "Set to zero" });
     }
     catch (error) {
