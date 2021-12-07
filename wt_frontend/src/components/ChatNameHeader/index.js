@@ -13,7 +13,6 @@ const Index = ({
         <div
             id={styles.container}>
             <div id={styles.profilePic}>
-                <div id={styles.active} />
                 <AiOutlineUser size={30} />
             </div>
             <div id={styles.nameDescription}>
